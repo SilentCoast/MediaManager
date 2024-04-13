@@ -2,7 +2,14 @@
 {
     public static class FileProcesser
     {
-        public static void TraverseDirectory(string directory,string destinationRoot)
+        /// <summary>
+        /// Processing all files in all subfolders, Sorting them by years.
+        /// 
+        /// In destinationRoot will be created folders for each year and all files with last modification date of this year will be put there. if in this folder file with same name already exist, the programm will check if the files are the same, if they the same the duplicat will be deleted, if they are not the same, second file will be sasved with generic name: PhotoX or VideoX where X is the number
+        /// </summary>
+        /// <param name="directory">root directory of target</param>
+        /// <param name="destinationRoot">root directory of destination</param>
+        public static void Process(string directory,string destinationRoot)
         {
             int PhotoName = 1;
             int VideoName = 1;
@@ -10,6 +17,7 @@
             foreach (string file in Directory.GetFiles(directory))
             {
                 FileInfo info = new FileInfo(file);
+                //remove useles file
                 if(info.Name == "Thumbs.db")
                 {
                     File.Delete(file);
@@ -24,6 +32,7 @@
                 string destinationToMove = $"{destinationRoot}\\{year}\\{info.Name}";
                 Directory.CreateDirectory($"{destinationRoot}\\{year}");
                 MoveFile(file, destinationToMove );
+                //Move file to destination, if already exist with same name, check if files are equal
                 void MoveFile(string file,string destinationToMove)
                 {
                     try
@@ -63,7 +72,7 @@
             foreach (string subDirectory in Directory.GetDirectories(directory))
             {
                 Console.WriteLine("Directory: " + subDirectory);
-                TraverseDirectory(subDirectory,destinationRoot);
+                Process(subDirectory,destinationRoot);
             }
         }
         static bool AreFilesEqual(string filePath1, string filePath2)

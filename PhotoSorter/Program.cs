@@ -6,11 +6,12 @@ namespace PhotoSorter
     {
         static void Main(string[] args)
         {
-            string target = "C:\\AndreiJob\\Media\\Старые\\notsorted";
-            string destination = "C:\\AndreiJob\\Media\\Старые";
+            string target = "";
+            string destination = "";
 
-            //FileProcesser.TraverseDirectory(target,destination);
+            FileProcesser.Process(target,destination);
 
+            Console.WriteLine("\nApp fineshed working");
             Console.ReadKey();
         }
         
