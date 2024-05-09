@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+﻿using PhotoSorterLib;
 
 namespace PhotoSorter
 {
@@ -6,14 +6,22 @@ namespace PhotoSorter
     {
         static void Main(string[] args)
         {
-            string target = "";
-            string destination = "";
+            IFileProcessorExtended fileProcessor = new FileProcessor();
 
-            FileProcesser.Process(target,destination);
+            IFileHandlingRule deleteThumbsDbRule = new DeleteThumbsDbRule();
+            fileProcessor.AddFileHandlingRule(deleteThumbsDbRule);
+
+            string sourceDirectory = "C:\\Photos";
+            string destinationRoot = "C:\\Photos\\Sorted";
+
+            fileProcessor.ProcessFiles(sourceDirectory, destinationRoot);
+            fileProcessor.DeleteEmptyFolders(destinationRoot);
+
+            IStatisticsCalculator statisticsCalculator = new StatisticsCalculator();
+            statisticsCalculator.CalculateAndDisplayStatistics(destinationRoot);
 
             Console.WriteLine("\nApp fineshed working");
             Console.ReadKey();
         }
-        
     }
 }

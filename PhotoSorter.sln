@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSorter", "PhotoSorter\PhotoSorter.csproj", "{850C8CD4-0937-465D-96A9-7183B6F1B665}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoSorter", "PhotoSorter\PhotoSorter.csproj", "{850C8CD4-0937-465D-96A9-7183B6F1B665}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoSorterLib", "PhotoSorterLib\PhotoSorterLib.csproj", "{44FD278C-64D8-456D-A0C2-702262867343}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{850C8CD4-0937-465D-96A9-7183B6F1B665}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{850C8CD4-0937-465D-96A9-7183B6F1B665}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{850C8CD4-0937-465D-96A9-7183B6F1B665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44FD278C-64D8-456D-A0C2-702262867343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44FD278C-64D8-456D-A0C2-702262867343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44FD278C-64D8-456D-A0C2-702262867343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44FD278C-64D8-456D-A0C2-702262867343}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
