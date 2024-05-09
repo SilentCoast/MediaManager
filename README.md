@@ -28,34 +28,22 @@ PhotoSorter is a C# application designed to help you organize your photo and vid
 ## Example
 
 ```csharp
-using System;
-
-namespace PhotoSorterLib
+static void Main(string[] args)
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // Create an instance of FileProcessor
-            IFileProcessor fileProcessor = new FileProcessor(new StatisticsCalculator());
+    IFileProcessorExtended fileProcessor = new FileProcessor();
 
-            // Create and add custom file handling rules
-            IFileHandlingRule deleteThumbsDbRule = new DeleteThumbsDbRule();
-            fileProcessor.AddFileHandlingRule(deleteThumbsDbRule);
+    IFileHandlingRule deleteThumbsDbRule = new DeleteThumbsDbRule();
+    fileProcessor.AddFileHandlingRule(deleteThumbsDbRule);
 
-            // Specify source and destination directories
-            string sourceDirectory = @"C:\SourceDirectory";
-            string destinationRoot = @"C:\DestinationRoot";
+    string sourceDirectory = "C:\\Photos";
+    string destinationRoot = "C:\\Photos\\Sorted";
 
-            // Process files
-            fileProcessor.ProcessFiles(sourceDirectory, destinationRoot);
+    fileProcessor.ProcessFiles(sourceDirectory, destinationRoot);
+    fileProcessor.DeleteEmptyFolders(destinationRoot);
 
-            Console.WriteLine("File processing completed.");
+    IStatisticsCalculator statisticsCalculator = new StatisticsCalculator();
+    statisticsCalculator.CalculateAndDisplayStatistics(destinationRoot);
 
-            // Remove empty folders
-            fileProcessor.RemoveEmptyFolders(destinationRoot);
-
-            Console.WriteLine("Empty folder removal completed.");
-        }
-    }
+    Console.WriteLine("\nApp fineshed working");
+    Console.ReadKey();
 }
