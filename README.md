@@ -6,7 +6,7 @@ PhotoSorter is a C# application designed to help you organize your photo and vid
 
 - **File Sorting**: Automatically sorts photo and video files into folders based on their last modification year.
 - **Duplicate Handling**: Checks for duplicate files and ensures that only one copy is retained.
-- **Custom File Handling Rules**: Allows users to define custom rules for handling specific file types, such as deleting "Thumbs.db" files.
+- **Custom File Handling Rules**: Allows users to define custom rules for handling specific file types, for example deleting "Thumbs.db" files that may be present if media was imported from some old cameras.
 - **Statistics Calculation**: Calculates and displays the total size of photos and videos in the specified directory.
 - **Empty Folder Removal**: Removes empty folders from the destination directory after file sorting.
 
