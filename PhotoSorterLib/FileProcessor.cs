@@ -67,8 +67,8 @@
                             }
                             else //if files are not equal but have same name - create new name for one of the files
                             {
-                                string extension = Path.GetExtension(file);
-                                if (extension.ToLower() == ".jpg")
+                                string extension = Path.GetExtension(file).ToLower();
+                                if (extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".gif")
                                 {
                                     destinationToMove = $"{destinationRoot}\\{year}\\Photo{PhotoName++}{extension}";
                                 }
