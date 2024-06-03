@@ -1,5 +1,4 @@
 ﻿using PhotoSorterLib;
-using PhotoSorterLib.Converters;
 using PhotoSorterLib.FileHandlingRules;
 using PhotoSorterLib.Logging;
 using PhotoSorterLib.Processors;
@@ -16,15 +15,20 @@ namespace PhotoSorter
             IFileProcessor fileProcessor = new FileProcessor(loggerService);
 
             //define target and destination derectories
-            string sourceDirectory = "C:\\Photos";
-            string destinationRoot = "C:\\Photos\\Sorted";
+            string sourceDirectory = "C:\\Media";
+            string destinationRoot = "C:\\Media\\Sorted";
 
             //set up rules for proccesing
             fileProcessor.FileHandlingRules.AddRange(
                 new List<IFileHandlingRule>()
                 {
+                    //deletes unnecessary files
                     new DeleteThumbsDbRule(loggerService),
-                    new SortByYearRule(destinationRoot, loggerService)
+                    //Sorts files by years
+                    new SortByYearRule(destinationRoot, loggerService),
+                    //splits Photos and Videos
+                    new SplitPhotoAndVideoRule(sourceDirectory, destinationRoot, loggerService)
+                    //define your own rules for processing...
                 });
 
             fileProcessor.ProcessFiles(sourceDirectory);
