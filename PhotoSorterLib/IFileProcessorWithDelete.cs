@@ -1,6 +1,6 @@
 ﻿namespace PhotoSorterLib
 {
-    public interface IFileProcessorExtended : IFileProcessor
+    public interface IFileProcessorWithDelete : IFileProcessor
     {
         void DeleteEmptyFolders(string targetPath);
     }

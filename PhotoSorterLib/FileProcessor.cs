@@ -1,6 +1,6 @@
 ﻿namespace PhotoSorterLib
 {
-    public class FileProcessor : IFileProcessorExtended
+    public class FileProcessor : IFileProcessorWithDelete
     {
         private readonly List<IFileHandlingRule> _fileHandlingRules = new List<IFileHandlingRule>();
 

@@ -6,7 +6,7 @@ namespace PhotoSorter
     {
         static void Main(string[] args)
         {
-            IFileProcessorExtended fileProcessor = new FileProcessor();
+            IFileProcessorWithDelete fileProcessor = new FileProcessor();
 
             IFileHandlingRule deleteThumbsDbRule = new DeleteThumbsDbRule();
             fileProcessor.AddFileHandlingRule(deleteThumbsDbRule);
