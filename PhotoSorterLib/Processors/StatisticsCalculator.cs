@@ -1,6 +1,8 @@
-﻿namespace PhotoSorterLib
+﻿using PhotoSorterLib.Converters;
+
+namespace PhotoSorterLib.Processors
 {
-    public class StatisticsCalculator : IStatisticsCalculator
+    public class StatisticsCalculator
     {
         private static readonly string[] PhotoExtensions = { ".jpg", ".jpeg", ".png", ".gif" };
         private static readonly string[] VideoExtensions = { ".mp4", ".avi", ".mov", ".wmv" };
@@ -9,13 +11,12 @@
         /// Calculates the total photo size and total video size in directory and all subdirectories
         /// </summary>
         /// <param name="destinationRoot"></param>
-        public void CalculateAndDisplayStatistics(string destinationRoot)
+        public (double totalPhotoSize, double totalVideoSize) CalculatePhotoAndVideoSizeGb(string destinationRoot)
         {
             long totalPhotoSize = CalculateTotalSize(destinationRoot, PhotoExtensions);
             long totalVideoSize = CalculateTotalSize(destinationRoot, VideoExtensions);
 
-            Console.WriteLine($"Total Photo Size: {Math.Round(BytesConverter.BytesToGigabytes(totalPhotoSize),2)} GB");
-            Console.WriteLine($"Total Video Size: {Math.Round(BytesConverter.BytesToGigabytes(totalVideoSize),2)} GB");
+            return(Math.Round(BytesConverter.BytesToGigabytes(totalPhotoSize), 2), Math.Round(BytesConverter.BytesToGigabytes(totalVideoSize), 2));
         }
 
         private long CalculateTotalSize(string directory, string[] extensions)

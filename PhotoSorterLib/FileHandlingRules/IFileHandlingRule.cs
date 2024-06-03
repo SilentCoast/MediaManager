@@ -1,4 +1,4 @@
-﻿namespace PhotoSorterLib
+﻿namespace PhotoSorterLib.FileHandlingRules
 {
     public interface IFileHandlingRule
     {
