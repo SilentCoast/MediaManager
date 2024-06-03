@@ -63,6 +63,6 @@ static void Main(string[] args)
     Console.WriteLine($"Total Photo Size: {totalPhotoSize} GB");
     Console.WriteLine($"Total Video Size: {totalVideoSize} GB");
 
-    Console.WriteLine("\nApp fineshed working");
+    Console.WriteLine("\nApp finished working");
     Console.ReadKey();
 }
