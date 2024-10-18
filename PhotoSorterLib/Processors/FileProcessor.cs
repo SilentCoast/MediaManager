@@ -14,7 +14,7 @@ namespace PhotoSorterLib.Processors
         public ILoggerService LoggerService { get; }
 
         /// <summary>
-        /// Processing all files in all subfolders, Sorting them by years.
+        /// Processing all files in all subfolders, using specified rules
         /// </summary>
         /// <param name="directory">root directory of target</param>
         public void ProcessFiles(string directory)

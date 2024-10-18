@@ -26,5 +26,4 @@ namespace PhotoSorterLib.FileHandlingRules
             LoggerService.WriteLine($"Deleted {fileInfo.FullName}");
         }
     }
-
 }
