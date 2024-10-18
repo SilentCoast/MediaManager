@@ -1,6 +1,6 @@
-﻿namespace PhotoSorterLib.FileHandlingRules
+﻿namespace MediaManager.Lib.FileHandlingRules
 {
-    public interface IFileHandlingRule
+    public interface IFileHandleRule
     {
         /// <summary>
         /// Condition to Handle file

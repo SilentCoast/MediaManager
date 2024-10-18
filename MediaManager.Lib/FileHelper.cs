@@ -1,4 +1,4 @@
-﻿namespace PhotoSorterLib
+﻿namespace MediaManager.Lib
 {
     /// <summary>
     /// Temporary solution untill proper Interface for that functionality is not created

@@ -1,12 +1,12 @@
-﻿using PhotoSorterLib.Logging;
+﻿using MediaManager.Lib.Logging;
 
-namespace PhotoSorterLib.FileHandlingRules
+namespace MediaManager.Lib.FileHandlingRules
 {
     /// <summary>
     /// Delete files named Thumbs.db
     /// May be helpfull when sorting photos made on old cameras
     /// </summary>
-    public class DeleteThumbsDbRule : IFileHandlingRule
+    public class DeleteThumbsDbRule : IFileHandleRule
     {
         public ILoggerService LoggerService { get; }
 
@@ -26,5 +26,4 @@ namespace PhotoSorterLib.FileHandlingRules
             LoggerService.WriteLine($"Deleted {fileInfo.FullName}");
         }
     }
-
 }

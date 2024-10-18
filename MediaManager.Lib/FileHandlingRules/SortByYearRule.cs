@@ -1,7 +1,7 @@
 ﻿
-using PhotoSorterLib.Logging;
+using MediaManager.Lib.Logging;
 
-namespace PhotoSorterLib.FileHandlingRules
+namespace MediaManager.Lib.FileHandlingRules
 {
     /// <summary>
     /// In destinationRoot will be created folders for each year 
@@ -12,7 +12,7 @@ namespace PhotoSorterLib.FileHandlingRules
     /// PhotoX or VideoX, where X is the number in order.
     /// <para></para>ShouldHandle set to always true
     /// </summary>
-    public class SortByYearRule : IFileHandlingRule
+    public class SortByYearRule : IFileHandleRule
     {
         public SortByYearRule(string destinationRoot, ILoggerService loggerService)
         {
