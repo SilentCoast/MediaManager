@@ -1,4 +1,4 @@
-﻿namespace PhotoSorterLib.Converters
+﻿namespace MediaManager.Lib.Converters
 {
     public static class BytesConverter
     {

@@ -1,4 +1,4 @@
-﻿namespace PhotoSorterLib.Logging
+﻿namespace MediaManager.Lib.Logging
 {
     public class ConsoleLogOutput : ILogOutput
     {

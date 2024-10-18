@@ -1,7 +1,7 @@
-﻿using PhotoSorterLib.FileHandlingRules;
-using PhotoSorterLib.Logging;
+﻿using MediaManager.Lib.FileHandlingRules;
+using MediaManager.Lib.Logging;
 
-namespace PhotoSorterLib.Processors
+namespace MediaManager.Lib.Processors
 {
     public class FileProcessor : IFileProcessor
     {
@@ -10,7 +10,7 @@ namespace PhotoSorterLib.Processors
             LoggerService = loggerService;
         }
 
-        public List<IFileHandlingRule> FileHandlingRules { get; set; } = new List<IFileHandlingRule>();
+        public List<IFileHandleRule> FileHandleRules { get; set; } = new List<IFileHandleRule>();
         public ILoggerService LoggerService { get; }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace PhotoSorterLib.Processors
                 FileInfo info = new FileInfo(file);
 
                 // Apply file handling rules
-                foreach (var rule in FileHandlingRules)
+                foreach (var rule in FileHandleRules)
                 {
                     if (rule.ShouldHandle(info))
                     {

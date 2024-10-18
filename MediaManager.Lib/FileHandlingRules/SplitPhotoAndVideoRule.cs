@@ -1,13 +1,13 @@
-﻿using PhotoSorterLib.Logging;
+﻿using MediaManager.Lib.Logging;
 
-namespace PhotoSorterLib.FileHandlingRules
+namespace MediaManager.Lib.FileHandlingRules
 {
     /// <summary>
     /// Creates 2 new folders (Photo,Video) in the destinationRoot. All video files will be moved to the Video folder respecting all path that file has till the targetDirectory. Same for Photo.
     /// <para>If file has unknown extension it'll be put in the NotRecognized folder</para>
     /// <para>ShouldHandle set to always true</para>
     /// </summary>
-    public class SplitPhotoAndVideoRule : IFileHandlingRule
+    public class SplitPhotoAndVideoRule : IFileHandleRule
     {
         public SplitPhotoAndVideoRule(string targetDirectory, string destinationRoot, ILoggerService loggerService)
         {

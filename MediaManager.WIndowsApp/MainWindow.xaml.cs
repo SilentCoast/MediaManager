@@ -1,28 +1,46 @@
-﻿using PhotoSorterLib;
-using PhotoSorterLib.FileHandlingRules;
-using PhotoSorterLib.Logging;
-using PhotoSorterLib.Processors;
+﻿using MediaManager.Lib.FileHandlingRules;
+using MediaManager.Lib.Logging;
+using MediaManager.Lib.Processors;
+using MediaManager.Lib;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using Xabe.FFmpeg;
 
-namespace PhotoSorter
+namespace MediaManager.WIndowsApp
 {
-    internal class Program
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
-        static void Main(string[] args)
+        public MainWindow()
         {
+            InitializeComponent();
+
+            FFmpeg.SetExecutablesPath("C:\\tools\\msys64\\mingw64\\bin");
+
             //set up the required Logger
             ILoggerService loggerService = new LoggerService(new ConsoleLogOutput());
 
             IFileProcessor fileProcessor = new FileProcessor(loggerService);
 
             //define target and destination derectories
-            string sourceDirectory = "C:\\Users\\Andre\\OneDrive\\Рабочий стол\\test";
-            string destinationRoot = "C:\\Users\\Andre\\OneDrive\\Рабочий стол\\MediaSorted";
+            string inputDirectory = "C:\\Users\\Andre\\OneDrive\\Рабочий стол\\test";
+            string outputDirectory = "C:\\Users\\Andre\\OneDrive\\Рабочий стол\\MediaSorted";
 
             GetExtensionRule getExtensionRule = new GetExtensionRule(loggerService);
 
             //set up rules for proccesing
-            fileProcessor.FileHandlingRules.AddRange(
-                new List<IFileHandlingRule>()
+            fileProcessor.FileHandleRules.AddRange(
+                new List<IFileHandleRule>()
                 {
                     //deletes unnecessary files
                     //new DeleteThumbsDbRule(loggerService),
@@ -34,11 +52,11 @@ namespace PhotoSorter
                     //new VideoConversionRule(loggerService),
                     //getExtensionRule,
 
-                    new ImageConversionRule(loggerService),
-                    new VideoConversionRule(loggerService),
+                    new ImageConversionRule(loggerService, inputDirectory, outputDirectory),
+                    new VideoConversionRule(loggerService, inputDirectory, outputDirectory),
                 });
 
-            fileProcessor.ProcessFiles(sourceDirectory);
+            fileProcessor.ProcessFiles(inputDirectory);
 
             var uniqueExtensions = getExtensionRule.GetExtensions();
             foreach (var ext in uniqueExtensions)
@@ -46,7 +64,7 @@ namespace PhotoSorter
                 loggerService.WriteLine($"Unique Extension: {ext}");
             }
 
-            //FileHelper.DeleteEmptyFolders(destinationRoot);
+            FileHelper.DeleteEmptyFolders(outputDirectory);
 
             //get some statistics
             //StatisticsCalculator statisticsCalculator = new StatisticsCalculator();

@@ -1,7 +1,8 @@
-﻿using PhotoSorterLib.Converters;
+﻿using MediaManager.Lib.Converters;
 
-namespace PhotoSorterLib.Processors
+namespace MediaManager.Lib.Processors
 {
+    //TODO: redo as rules
     public class StatisticsCalculator
     {
         /// <summary>

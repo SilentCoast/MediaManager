@@ -1,8 +1,8 @@
-﻿using PhotoSorterLib.Logging;
+﻿using MediaManager.Lib.Logging;
 
-namespace PhotoSorterLib.FileHandlingRules
+namespace MediaManager.Lib.FileHandlingRules
 {
-    public class GetExtensionRule : IFileHandlingRule
+    public class GetExtensionRule : IFileHandleRule
     {
         public ILoggerService LoggerService { get; }
 

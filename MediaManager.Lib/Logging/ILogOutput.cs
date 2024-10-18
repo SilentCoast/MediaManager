@@ -1,6 +1,6 @@
-﻿namespace PhotoSorterLib.Logging
+﻿namespace MediaManager.Lib.Logging
 {
-    public interface ILoggerService
+    public interface ILogOutput
     {
         void Write(string message);
         void WriteLine(string message);

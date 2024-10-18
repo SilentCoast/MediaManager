@@ -1,19 +1,17 @@
-﻿using PhotoSorterLib.FileHandlingRules;
-using PhotoSorterLib.Logging;
+﻿using MediaManager.Lib.FileHandlingRules;
+using MediaManager.Lib.Logging;
 using Xabe.FFmpeg;
 
-public class VideoConversionRule : IFileHandlingRule
+public class VideoConversionRule(ILoggerService logger, string inputDirectory, string outputDirectory) : IFileHandleRule
 {
-    private ILoggerService _logger;
-    private static readonly string[] _videoExtensions = 
-    { 
+    private readonly ILoggerService _logger = logger;
+    private readonly string inputDirectory = inputDirectory;
+    private readonly string outputDirectory = outputDirectory;
+    private static readonly string[] _videoExtensions =
+    {
         ".avi", ".mpg", ".3gp",
         ".mp4"
     };
-    public VideoConversionRule(ILoggerService logger)
-    {
-        _logger = logger;
-    }
 
     public bool ShouldHandle(FileInfo fileInfo)
     {
@@ -22,7 +20,14 @@ public class VideoConversionRule : IFileHandlingRule
 
     public void Handle(FileInfo fileInfo)
     {
-        string outputFilePath = Path.ChangeExtension(fileInfo.FullName, ".mp4");
+        string relativePath = Path.GetRelativePath(inputDirectory, fileInfo.FullName);
+
+        string outputFilePath = Path.Combine(outputDirectory, relativePath);
+
+        outputFilePath = Path.ChangeExtension(outputFilePath, ".mp4");
+
+        Directory.CreateDirectory(Path.GetDirectoryName(outputFilePath)); 
+
 
         var conversionTask = ConvertToH265(fileInfo.FullName, outputFilePath);
         conversionTask.GetAwaiter().GetResult();
@@ -35,7 +40,7 @@ public class VideoConversionRule : IFileHandlingRule
         var conversion = FFmpeg.Conversions.New()
            .AddParameter($"-i \"{inputFile}\"")
            .AddParameter("-c:v libx265") // Set the codec to H.265
-           .AddParameter("-crf 21") //quality 18 to 23 where 18 is the best and 23 is close to indistingushable
+           .AddParameter("-crf 20")
            .AddParameter($"\"{outputFile}\"");
 
         await conversion.Start();

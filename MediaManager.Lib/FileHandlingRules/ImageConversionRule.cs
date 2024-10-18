@@ -1,17 +1,14 @@
-﻿using PhotoSorterLib.FileHandlingRules;
-using PhotoSorterLib.Logging;
+﻿using MediaManager.Lib.FileHandlingRules;
+using MediaManager.Lib.Logging;
 using Xabe.FFmpeg;
 
-public class ImageConversionRule : IFileHandlingRule
+public class ImageConversionRule(ILoggerService logger, string inputDirectory, string outputDirectory) : IFileHandleRule
 {
+    private readonly ILoggerService _logger = logger;
+    private readonly string inputDirectory = inputDirectory;
+    private readonly string outputDirectory = outputDirectory;
     private static readonly string[] _imageExtensions = { ".jpg", ".jpeg", ".png" };
-    private ILoggerService _logger;
-    public ImageConversionRule(ILoggerService logger)
-    {
-        FFmpeg.SetExecutablesPath("C:\\tools\\msys64\\mingw64\\bin");
-        _logger = logger;
-    }
-
+    
     public bool ShouldHandle(FileInfo fileInfo)
     {
         // Check if the file is an image with one of the supported extensions
@@ -20,7 +17,13 @@ public class ImageConversionRule : IFileHandlingRule
 
     public void Handle(FileInfo fileInfo)
     {
-        string outputFilePath = Path.ChangeExtension(fileInfo.FullName, ".webp");
+        string relativePath = Path.GetRelativePath(inputDirectory, fileInfo.FullName);
+
+        string outputFilePath = Path.Combine(outputDirectory, relativePath);
+
+        outputFilePath = Path.ChangeExtension(outputFilePath, ".webp");
+
+        Directory.CreateDirectory(Path.GetDirectoryName(outputFilePath));
 
         var conversionTask = ConvertToWebP(fileInfo.FullName, outputFilePath);
         conversionTask.GetAwaiter().GetResult();
